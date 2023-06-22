@@ -1,0 +1,92 @@
+# Database for EPICS PVS for txm optics control
+# This database contains all of the PVs used by the txmoptics base class.
+
+#############
+# PV Prefixes 
+#############
+
+record(stringout, "$(P)$(R)CameraPVPrefix")
+{
+   field(VAL,  "$(CAMERA_PREFIX)")
+}
+
+##################
+# Example PV Names
+##################
+
+record(stringout, "$(P)$(R)ExamplePVName")
+{
+   field(VAL,  "$(EXAMPLE_PV_NAME)")
+}
+
+#########################
+# Sample pick-up location
+#########################
+
+record(ao, "$(P)$(R)SampleX")
+{
+   field(PREC,  "2")
+}
+
+record(ao, "$(P)$(R)SampleY")
+{
+   field(PREC,  "2")
+}
+
+record(ao, "$(P)$(R)SampleZ")
+{
+   field(PREC, "2")
+}
+
+record(ao, "$(P)$(R)SampleTopX")
+{
+   field(PREC, "2")
+}
+
+record(ao, "$(P)$(R)SampleTopZ")
+{
+   field(PREC, "2")
+}
+
+##########################
+# Robot via Channel Access
+##########################
+
+record(busy,"$(P)$(R)Go")
+{
+   field(ZNAM,"Done")
+   field(ZSV, "NO_ALARM")
+   field(ONAM,"Go")
+   field(OSV, "MINOR")
+   field(VAL, "0")
+}
+
+
+##############################
+# AM status via Channel Access
+##############################
+
+record(waveform,"$(P)$(R)RobotStatus") 
+{
+   field(FTVL, "UCHAR")
+   field(NELM, "256")
+}
+
+record(calcout, "$(P)$(R)Watchdog")
+{
+   field(SCAN, "1 second")
+   field(INPA, "$(P)$(R)Watchdog.VAL NPP")
+   field(CALC, "A-1")
+   field(OCAL, "A>0?1:0")
+   field(OOPT, "On Change")
+   field(DOPT, "Use OCAL")
+   field(OUT,  "$(P)$(R)ServerRunning PP")
+}
+
+record(bi, "$(P)$(R)ServerRunning")
+{
+   field(ZNAM, "Stopped")
+   field(ZSV,  "MAJOR")
+   field(ONAM, "Running")
+   field(OSV,  "NO_ALARM")
+}

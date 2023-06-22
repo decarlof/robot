@@ -1,0 +1,2 @@
+file "robot.req", P=$(P), R=$(R)
+file "robot_settings.req", P=$(P), R=$(R)
